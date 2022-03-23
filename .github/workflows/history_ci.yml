@@ -24,14 +24,23 @@ on:
       trigger:
         required: true
         type: string
-      md5sum:
+      event_id:
+        required: true
+        type: string
+      event:
         required: true
         type: string
 jobs:
   ci_start:
-    name: CI start
+    name: CI history
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name:  Checksum
+        run: |
+          md5sum=$(md5sum .github/workflows/merge_pr.yml| cut -d\  -f1)
+          echo "md5sum=${md5sum}" >> $GITHUB_ENV
       - name: Pipelines history start
         uses: docker://iradu/curl_send_post
         env:
@@ -39,10 +48,10 @@ jobs:
           x_app_name: ${{ inputs.app_name }}
           x_description: ${{ inputs.description }}
           x_tremend_code: ${{ inputs.tremend_code }}
-          x_event: "start"
+          x_event: ${{ inputs.event }}
           x_env: ${{ inputs.env }}
-          x_event_id: ${{ github.sha }}
+          x_event_id: ${{ inputs.event_id }}
           x_app_type: ${{ inputs.app_type }}
-          x_md5sum: ${{ inputs.md5sum }}
+          x_md5sum: ${{ env.md5sum }}
           x_status: "true"
           x_trigger: ${{ inputs.trigger }}
