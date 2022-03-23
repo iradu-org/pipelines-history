@@ -1,0 +1,48 @@
+name: CI Start
+
+on:
+  workflow_call:
+    inputs:
+      URL:
+        required: true
+        type: string
+      app_name:
+        required: true
+        type: string
+      description:
+        required: true
+        type: string
+      tremend_code:
+        required: true
+        type: string
+      env:
+        required: true
+        type: string
+      app_type:
+        required: true
+        type: string
+      trigger:
+        required: true
+        type: string
+      md5sum:
+        required: true
+        type: string
+jobs:
+  ci_start:
+    name: CI start
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pipelines history start
+        uses: docker://iradu/curl_send_post
+        env:
+          URL: ${{ inputs.URL }}
+          x_app_name: ${{ inputs.app_name }}
+          x_description: ${{ inputs.description }}
+          x_tremend_code: ${{ inputs.tremend_code }}
+          x_event: "start"
+          x_env: ${{ inputs.env }}
+          x_event_id: ${{ github.sha }}
+          x_app_type: ${{ inputs.app_type }}
+          x_md5sum: ${{ inputs.md5sum }}
+          x_status: "true"
+          x_trigger: ${{ inputs.trigger }}
