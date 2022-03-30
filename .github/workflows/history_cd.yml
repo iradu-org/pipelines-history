@@ -21,7 +21,7 @@ on:
       event:
         required: true
         type: string
-      ci_file:
+      cd_file:
         required: true
         type: string
 jobs:
@@ -33,9 +33,9 @@ jobs:
         uses: actions/checkout@v2
       - name:  Checksum
         env:
-          CI_FILE: ${{ inputs.ci_file }}
+          CD_FILE: ${{ inputs.cd_file }}
         run: |
-          md5sum=$(md5sum .github/workflows/$CI_FILE| cut -d\  -f1)
+          md5sum=$(md5sum .github/workflows/$CD_FILE| cut -d\  -f1)
           echo "md5sum=${md5sum}" >> $GITHUB_ENV
       - name: Pipelines history start
         uses: docker://iradu/curl_send_post
