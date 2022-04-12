@@ -24,6 +24,9 @@ on:
       cd_file:
         required: true
         type: string
+      token:
+        required: true
+        type: string
 jobs:
   ci_start:
     name: CD history
@@ -41,11 +44,11 @@ jobs:
         uses: docker://iradu/curl_send_post
         env:
           URL: ${{ inputs.URL }}
-          x_tremend_code: ${{ inputs.tremend_code }}
+          TOKEN: ${{ inputs.token }}
+          x_tremendCode: ${{ inputs.tremend_code }}
           x_event: ${{ inputs.event }}
-          x_env: ${{ inputs.env }}
+          x_environment: ${{ inputs.env }}
           x_event_id: ${{ inputs.event_id }}
           x_md5sum: ${{ env.md5sum }}
-          x_status: "true"
           x_trigger: ${{ inputs.trigger }}
 

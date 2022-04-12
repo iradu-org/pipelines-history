@@ -6,19 +6,19 @@ on:
       URL:
         required: true
         type: string
-      app_name:
+      appName:
         required: true
         type: string
       description:
         required: true
         type: string
-      tremend_code:
+      tremendCode:
         required: true
         type: string
-      env:
+      environment:
         required: true
         type: string
-      app_type:
+      appType:
         required: true
         type: string
       trigger:
@@ -31,6 +31,9 @@ on:
         required: true
         type: string
       ci_file:
+        required: true
+        type: string
+      token:
         required: true
         type: string
 jobs:
@@ -50,14 +53,14 @@ jobs:
         uses: docker://iradu/curl_send_post
         env:
           URL: ${{ inputs.URL }}
-          x_app_name: ${{ inputs.app_name }}
+          TOKEN: ${{ inputs.token }}
+          x_appName: ${{ inputs.appName }}
           x_description: ${{ inputs.description }}
-          x_tremend_code: ${{ inputs.tremend_code }}
+          x_tremendCode: ${{ inputs.tremendCode }}
           x_event: ${{ inputs.event }}
-          x_env: ${{ inputs.env }}
+          x_environment: ${{ inputs.environment }}
           x_event_id: ${{ inputs.event_id }}
-          x_app_type: ${{ inputs.app_type }}
+          x_appType: ${{ inputs.appType }}
           x_md5sum: ${{ env.md5sum }}
-          x_status: "true"
           x_trigger: ${{ inputs.trigger }}
 
