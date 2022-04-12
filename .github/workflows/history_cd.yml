@@ -42,7 +42,7 @@ jobs:
           echo "md5sum=${md5sum}" >> $GITHUB_ENV
       - name: Pipelines history start
         uses: docker://iradu/curl_send_post
-        with:
+        env:
           URL: ${{ inputs.URL }}
           TOKEN: ${{ secrets.token }}
           x_tremendCode: ${{ inputs.tremend_code }}
