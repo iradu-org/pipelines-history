@@ -33,9 +33,9 @@ on:
       ci_file:
         required: true
         type: string
+    secrets:
       token:
         required: true
-        type: string
 jobs:
   ci_start:
     name: CI history
@@ -53,7 +53,7 @@ jobs:
         uses: docker://iradu/curl_send_post
         env:
           URL: ${{ inputs.URL }}
-          TOKEN: ${{ inputs.token }}
+          TOKEN: ${{ secrets.token }}
           x_appName: ${{ inputs.appName }}
           x_description: ${{ inputs.description }}
           x_tremendCode: ${{ inputs.tremendCode }}
