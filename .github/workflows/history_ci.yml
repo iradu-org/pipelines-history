@@ -59,7 +59,7 @@ jobs:
           x_tremendCode: ${{ inputs.tremendCode }}
           x_event: ${{ inputs.event }}
           x_environment: ${{ inputs.environment }}
-          x_event_id: ${{ inputs.event_id }}
+          x_eventId: ${{ inputs.event_id }}
           x_appType: ${{ inputs.appType }}
           x_md5sum: ${{ env.md5sum }}
           x_trigger: ${{ inputs.trigger }}
